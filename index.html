@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>專業電腦維護 | 重新定義效率</title>
+    <meta name="description" content="極簡科技感電腦維護服務平台，提供到府維修、售後服務與硬體升級。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+    <div class="bg-glow"></div>
+    <div class="grid-lines"></div>
+
+    <nav>
+        <div class="logo">
+            <i data-lucide="cpu"></i>
+            TECH<span>FIX</span>
+        </div>
+        <div class="nav-links">
+            <a href="#services">服務項目</a>
+            <a href="#pricing">報價中心</a>
+            <a href="#faq">常見問題</a>
+            <a href="admin.html" style="opacity: 0.6">管理員入口</a>
+        </div>
+        <button class="btn-primary" id="open-appointment">
+            <i data-lucide="calendar-check"></i>
+            預約維修
+        </button>
+    </nav>
+
+    <header class="hero">
+        <h1 class="hero-title">專業電腦維護<br><span>重新定義效率</span></h1>
+        <p class="hero-subtitle">我們結合精密診斷與極速響應，為您的數位資產提供全方位的技術保障。從硬體調優到系統重構，每一處細節都追求極致。</p>
+        <div class="hero-btns">
+            <button class="btn-primary" id="start-btn" style="padding: 1rem 2.5rem; font-size: 1rem;">
+                立即開始
+            </button>
+        </div>
+    </header>
+
+    <section id="services" class="section">
+        <div class="section-header">
+            <span class="section-tag">SERVICES</span>
+            <h2 class="section-title">核心維護服務</h2>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <i data-lucide="home"></i>
+                <h3>到府維修</h3>
+                <p>專業工程師親臨現場，解決軟硬體疑難雜症，省去您搬運電腦的煩惱。</p>
+            </div>
+            <div class="service-card">
+                <i data-lucide="shield-check"></i>
+                <h3>售後服務</h3>
+                <p>業界領先的保固承諾與遠端技術支援，確保您的設備長久穩定運作。</p>
+            </div>
+            <div class="service-card">
+                <i data-lucide="zap"></i>
+                <h3>硬體升級</h3>
+                <p>針對性能瓶頸提供量身定制的升級方案，釋放硬體的潛在效能。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="section">
+        <div class="section-header">
+            <span class="section-tag">TRANSPARENT</span>
+            <h2 class="section-title">透明報價表</h2>
+        </div>
+        <table class="pricing-table">
+            <thead>
+                <tr>
+                    <th>服務項目</th>
+                    <th>說明</th>
+                    <th>預估費用</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>基礎系統檢測</td>
+                    <td>全面硬體健康評估與系統優化</td>
+                    <td class="price-tag">NT$ 800+</td>
+                </tr>
+                <tr>
+                    <td>到府出勤費</td>
+                    <td>市中心區域工程師交通費用</td>
+                    <td class="price-tag">NT$ 500+</td>
+                </tr>
+                <tr>
+                    <td>組件更換工資</td>
+                    <td>不包含硬體耗材本身費用</td>
+                    <td class="price-tag">NT$ 1,200+</td>
+                </tr>
+                <tr>
+                    <td>數據恢復服務</td>
+                    <td>針對意外刪除或硬體損壞的資料救援</td>
+                    <td class="price-tag">NT$ 3,000+</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="faq" class="section">
+        <div class="section-header">
+            <span class="section-tag">SUPPORT</span>
+            <h2 class="section-title">常見問題</h2>
+        </div>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">
+                    到府維修通常需要多久時間？
+                    <i data-lucide="chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    視問題複雜度而定，多數軟體故障與基本零件更換可在 1-2 小時內完成。我們會事先進行初步電話診斷以準備所需零件。
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    如果修不好需要收費嗎？
+                    <i data-lucide="chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    若工程師判定無法修復且不建議進行進一步處理，我們僅會收取基礎的檢測費或出勤費。
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">
+                    硬體升級會影響保固嗎？
+                    <i data-lucide="chevron-down"></i>
+                </div>
+                <div class="faq-answer">
+                    我們的升級程序遵循原廠規範。若因加裝零件導致原始保固受損，我們會詳細告知風險，並針對我們安裝的零件提供自有保固。
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Appointment Modal -->
+    <div id="appointment-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>預約維修服務</h2>
+                <i data-lucide="x" id="close-modal" style="cursor: pointer;"></i>
+            </div>
+            <form id="repair-form">
+                <div class="form-group">
+                    <label>客戶姓名</label>
+                    <input type="text" id="customer_name" required placeholder="請輸入姓名">
+                </div>
+                <div class="form-group">
+                    <label>聯絡電話</label>
+                    <input type="tel" id="mobile" required placeholder="請輸入連絡電話">
+                </div>
+                <div class="form-group">
+                    <label>電腦型號</label>
+                    <input type="text" id="computer_model" placeholder="例如：MacBook Pro 2021">
+                </div>
+                <div class="form-group">
+                    <label>故障描述</label>
+                    <textarea id="description" rows="3" placeholder="請詳細說明您的電腦問題"></textarea>
+                </div>
+                <button type="submit" id="submit-btn" class="btn-primary" style="width: 100%; margin-top: 1rem;">
+                    確認送出預約
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 TECHFIX PC Maintenance. Defined by Precision.</p>
+    </footer>
+
+    <script src="config.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
