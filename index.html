@@ -16,7 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
-<body>
+<body class="theme-default">
     <div class="bg-glow"></div>
     <div class="grid-lines"></div>
 
@@ -31,10 +31,23 @@
             <a href="#faq">常見問題</a>
             <a href="admin.html" style="opacity: 0.6">管理員入口</a>
         </div>
-        <button class="btn-primary" id="open-appointment">
-            <i data-lucide="calendar-check"></i>
-            預約維修
-        </button>
+        <div style="display: flex; align-items: center;">
+            <div class="theme-switcher">
+                <button class="theme-btn active" data-theme="default" title="Default Theme">
+                    <i data-lucide="sun"></i>
+                </button>
+                <button class="theme-btn" data-theme="tech" title="Tech Theme">
+                    <i data-lucide="terminal"></i>
+                </button>
+                <button class="theme-btn" data-theme="minimal" title="Minimal Theme">
+                    <i data-lucide="leaf"></i>
+                </button>
+            </div>
+            <button class="btn-primary" id="open-appointment">
+                <i data-lucide="calendar-check"></i>
+                預約維修
+            </button>
+        </div>
     </nav>
 
     <header class="hero">
@@ -181,6 +194,7 @@
     </footer>
 
     <script src="config.js"></script>
+    <script src="theme.js"></script>
     <script src="main.js"></script>
 </body>
 
