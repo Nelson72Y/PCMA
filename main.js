@@ -22,11 +22,9 @@ document.querySelectorAll('.faq-question').forEach(button => {
 window.addEventListener('scroll', () => {
     const nav = document.querySelector('nav');
     if (window.scrollY > 50) {
-        nav.style.padding = '1rem 5%';
-        nav.style.background = 'rgba(5, 5, 5, 0.95)';
+        nav.classList.add('scrolled');
     } else {
-        nav.style.padding = '1.5rem 5%';
-        nav.style.background = 'rgba(5, 5, 5, 0.8)';
+        nav.classList.remove('scrolled');
     }
 });
 

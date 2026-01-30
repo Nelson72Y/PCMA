@@ -1,4 +1,8 @@
 :root {
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.theme-default {
     --bg-color: #050505;
     --accent-color: #00ccff;
     --accent-glow: rgba(0, 46, 114, 0.3);
@@ -7,7 +11,34 @@
     --text-primary: #ffffff;
     --text-secondary: #a0a0a0;
     --font-main: 'Outfit', sans-serif;
-    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --nav-bg: rgba(5, 5, 5, 0.8);
+    --modal-bg: #0a0a0a;
+}
+
+body.theme-tech {
+    --bg-color: #000a0a;
+    --accent-color: #00ffcc;
+    --accent-glow: rgba(0, 255, 204, 0.2);
+    --surface-color: rgba(0, 255, 204, 0.05);
+    --surface-border: rgba(0, 255, 204, 0.3);
+    --text-primary: #e0fefb;
+    --text-secondary: #70a0a0;
+    --font-main: 'Outfit', sans-serif;
+    --nav-bg: rgba(0, 10, 10, 0.9);
+    --modal-bg: #001515;
+}
+
+body.theme-minimal {
+    --bg-color: #f8f9fa;
+    --accent-color: #3a4d39;
+    --accent-glow: rgba(58, 77, 57, 0.1);
+    --surface-color: #ffffff;
+    --surface-border: #e2e8f0;
+    --text-primary: #1a1a1b;
+    --text-secondary: #64748b;
+    --font-main: 'Outfit', sans-serif;
+    --nav-bg: rgba(248, 249, 250, 0.9);
+    --modal-bg: #ffffff;
 }
 
 * {
@@ -85,9 +116,16 @@ nav {
     justify-content: space-between;
     align-items: center;
     z-index: 100;
-    background: rgba(5, 5, 5, 0.8);
+    background: var(--nav-bg);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid var(--surface-border);
+    transition: var(--transition-smooth);
+}
+
+nav.scrolled {
+    padding: 1rem 5%;
+    background: var(--nav-bg);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
 .logo {
@@ -175,6 +213,13 @@ nav {
     font-size: 1.2rem;
     max-width: 600px;
     margin-bottom: 3rem;
+    transition: var(--transition-smooth);
+}
+
+.theme-minimal .hero-title span {
+    background: linear-gradient(90deg, #1a1a1b, var(--accent-color));
+    -webkit-background-clip: text;
+    background-clip: text;
 }
 
 /* Services Section */
@@ -299,6 +344,41 @@ nav {
     font-size: 1.1rem;
 }
 
+/* Theme Switcher Styles */
+.theme-switcher {
+    display: flex;
+    gap: 0.5rem;
+    background: var(--surface-color);
+    border: 1px solid var(--surface-border);
+    padding: 0.3rem;
+    border-radius: 50px;
+    margin-right: 1rem;
+}
+
+.theme-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+    background: transparent;
+    color: var(--text-secondary);
+}
+
+.theme-btn:hover {
+    background: var(--surface-border);
+    color: var(--accent-color);
+}
+
+.theme-btn.active {
+    background: var(--accent-color);
+    color: var(--bg-color);
+}
+
 /* FAQ Section */
 .faq-container {
     max-width: 800px;
@@ -345,6 +425,10 @@ nav {
     transform: rotate(180deg);
 }
 
+.theme-minimal .faq-answer {
+    background: rgba(0, 0, 0, 0.03);
+}
+
 /* Footer */
 footer {
     padding: 4rem 10%;
@@ -389,7 +473,7 @@ footer {
 }
 
 .modal-content {
-    background: #0a0a0a;
+    background: var(--modal-bg);
     border: 1px solid var(--surface-border);
     padding: 2.5rem;
     border-radius: 16px;
@@ -425,11 +509,11 @@ footer {
 .form-group input,
 .form-group textarea {
     width: 100%;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--surface-color);
     border: 1px solid var(--surface-border);
     padding: 0.8rem 1rem;
     border-radius: 4px;
-    color: white;
+    color: var(--text-primary);
     font-family: inherit;
     transition: var(--transition-smooth);
 }
@@ -438,5 +522,31 @@ footer {
 .form-group textarea:focus {
     outline: none;
     border-color: var(--accent-color);
-    background: rgba(0, 255, 153, 0.05);
+    background: var(--surface-color);
+}
+
+.theme-tech .grid-lines {
+    background-image:
+        linear-gradient(var(--surface-border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--surface-border) 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity: 0.3;
+}
+
+.theme-minimal .grid-lines {
+    display: none;
+}
+
+.theme-minimal .bg-glow {
+    opacity: 0.2;
+}
+
+.theme-tech .service-card {
+    border-radius: 0;
+    clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
+}
+
+.theme-tech .btn-primary {
+    border-radius: 0;
+    clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
 }
