@@ -4,7 +4,7 @@ const body = document.body;
 
 const setTheme = (theme) => {
     // Remove all theme classes
-    body.classList.remove('theme-default', 'theme-tech', 'theme-minimal');
+    body.classList.remove('theme-dark', 'theme-light');
     // Add selected theme class
     body.classList.add(`theme-${theme}`);
 
@@ -18,7 +18,7 @@ const setTheme = (theme) => {
 };
 
 // Initialize theme
-const savedTheme = localStorage.getItem('preferred-theme') || 'default';
+const savedTheme = localStorage.getItem('preferred-theme') || 'dark';
 setTheme(savedTheme);
 
 // Add event listeners to buttons

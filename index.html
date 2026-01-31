@@ -16,7 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
-<body class="theme-default">
+<body class="theme-dark">
     <div class="bg-glow"></div>
     <div class="grid-lines"></div>
 
@@ -33,14 +33,11 @@
         </div>
         <div style="display: flex; align-items: center;">
             <div class="theme-switcher">
-                <button class="theme-btn active" data-theme="default" title="Default Theme">
+                <button class="theme-btn" data-theme="dark" title="Dark Mode">
+                    <i data-lucide="moon"></i>
+                </button>
+                <button class="theme-btn" data-theme="light" title="Light Mode">
                     <i data-lucide="sun"></i>
-                </button>
-                <button class="theme-btn" data-theme="tech" title="Tech Theme">
-                    <i data-lucide="terminal"></i>
-                </button>
-                <button class="theme-btn" data-theme="minimal" title="Minimal Theme">
-                    <i data-lucide="leaf"></i>
                 </button>
             </div>
             <button class="btn-primary" id="open-appointment">
