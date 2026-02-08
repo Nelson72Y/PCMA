@@ -424,6 +424,33 @@ footer {
     font-size: 0.9rem;
 }
 
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.admin-link {
+    color: var(--text-secondary);
+    opacity: 0.3;
+    transition: var(--transition-smooth);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-link:hover {
+    color: var(--accent-color);
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.admin-link i {
+    width: 18px;
+    height: 18px;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
     .hero-title {

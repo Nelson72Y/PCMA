@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>天目科技報價單系統</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        /* ========== GLOBAL STYLES ========== */
+        :root {
+            --primary-color: #8b7355;
+            --primary-light: #a69080;
+            --accent-color: #d4a574;
+            --bg-main: #faf9f7;
+            --bg-secondary: #f5f3f0;
+            --card-bg: #ffffff;
+            --text-dark: #3d3d3d;
+            --text-medium: #6b6b6b;
+            --text-light: #999999;
+            --border-color: #e8e6e3;
+            --border-light: #f0eeeb;
+            --success-green: #7fa388;
+            --error-red: #c98282;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.03);
+            --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.04);
+            --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.05);
+            --transition-speed: 0.2s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+            line-height: 1.6;
+            background: var(--bg-main);
+            color: var(--text-dark);
+            min-height: 100vh;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        /* ========== FORM VIEW STYLES ========== */
+        .form-view {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px 15px;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 20px;
+            animation: fadeInDown 0.4s ease;
+        }
+
+        .form-header img {
+            height: 50px;
+            margin-bottom: 12px;
+        }
+
+        .form-header h1 {
+            font-size: 22px;
+            font-weight: 500;
+            color: var(--primary-color);
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+        }
+
+        .form-header p {
+            color: var(--text-light);
+            font-size: 13px;
+        }
+
+        .form-card {
+            background: var(--card-bg);
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            animation: fadeInUp 0.4s ease;
+            transition: all var(--transition-speed);
+        }
+
+        .form-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .form-card h2 {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            font-weight: 400;
+            color: var(--text-medium);
+            margin-bottom: 4px;
+            font-size: 12px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 6px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 13px;
+            font-family: inherit;
+            transition: all var(--transition-speed);
+            background: var(--card-bg);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 2px rgba(139, 115, 85, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 60px;
+        }
+
+        .form-group input[readonly] {
+            background: var(--bg-secondary);
+            color: var(--text-light);
+        }
+
+        /* Product Items Section */
+        .product-items {
+            margin-top: 10px;
+        }
+
+        .product-item {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            padding: 12px;
+            margin-bottom: 8px;
+            position: relative;
+            transition: all var(--transition-speed);
+        }
+
+        .product-item:hover {
+            border-color: var(--primary-light);
+        }
+
+        .product-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .product-item-number {
+            font-weight: 500;
+            color: var(--primary-color);
+            font-size: 13px;
+        }
+
+        .remove-item-btn {
+            background: var(--error-red);
+            color: white;
+            border: none;
+            padding: 4px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 11px;
+            font-weight: 400;
+            transition: all var(--transition-speed);
+        }
+
+        .remove-item-btn:hover {
+            opacity: 0.9;
+        }
+
+        .add-item-btn {
+            width: 100%;
+            padding: 8px;
+            background: var(--success-green);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .add-item-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* Summary Section */
+        .summary-section {
+            background: var(--bg-secondary);
+            color: var(--text-dark);
+            padding: 14px;
+            border-radius: 4px;
+            margin-top: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            font-size: 13px;
+        }
+
+        .summary-row.total {
+            border-top: 1px solid var(--border-color);
+            margin-top: 6px;
+            padding-top: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .btn-primary,
+        .btn-secondary {
+            flex: 1;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 13px;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all var(--transition-speed);
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .btn-primary:hover {
+            opacity: 0.9;
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-secondary);
+        }
+
+        /* ========== PREVIEW VIEW STYLES ========== */
+        .preview-view {
+            display: none;
+            background: #e0e0e0;
+            /* Darker background to make paper stand out */
+            min-height: 100vh;
+        }
+
+        .preview-controls {
+            background: var(--primary-color);
+            padding: 10px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-md);
+        }
+
+        .preview-controls .btn-group {
+            margin: 0;
+        }
+
+        .preview-controls .btn-primary,
+        .preview-controls .btn-secondary {
+            padding: 6px 14px;
+            font-size: 12px;
+        }
+
+        .preview-container {
+            padding: 40px 10px;
+            display: flex;
+            justify-content: center;
+            overflow-x: auto;
+        }
+
+        @media print {
+
+            html,
+            body {
+                height: auto !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                background: white !important;
+                overflow: visible !important;
+            }
+
+            .form-view,
+            .preview-controls,
+            .btn-group {
+                display: none !important;
+                height: 0 !important;
+                margin: 0 !important;
+                padding: 0 !important;
+            }
+
+            .preview-view {
+                display: block !important;
+                background: white !important;
+                padding: 0 !important;
+                margin: 0 !important;
+            }
+
+            .preview-container {
+                max-width: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                display: block !important;
+                overflow: visible !important;
+            }
+
+            .quotation-template {
+                width: 100% !important;
+                /* Let print margin handle width */
+                min-height: auto !important;
+                /* Content will define height */
+                margin: 0 !important;
+                padding: 0 !important;
+                /* Remove internal padding, use @page margin only */
+                border: none !important;
+                box-shadow: none !important;
+                display: flex !important;
+            }
+
+            @page {
+                size: A4;
+                margin: 1cm;
+                /* Exactly 1cm as requested */
+            }
+        }
+
+        /* Quotation Template Styles */
+        .quotation-template {
+            background: white;
+            padding: 30px;
+            box-shadow: var(--shadow-lg);
+            width: 210mm;
+            max-width: 100%;
+            min-height: 297mm;
+            /* Standard A4 height */
+            height: auto;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            border-bottom: 1px solid var(--primary-color);
+            padding-bottom: 8px;
+            margin-bottom: 16px;
+        }
+
+        .header-info {
+            text-align: right;
+            font-size: 10px;
+            color: var(--text-medium);
+        }
+
+        .company-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--primary-color);
+        }
+
+        .title {
+            text-align: center;
+            font-size: 20px;
+            letter-spacing: 8px;
+            margin: 14px 0;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .info-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .info-section {
+            border: 1px solid var(--border-color);
+            background: var(--bg-secondary);
+        }
+
+        .info-section-title {
+            background: var(--primary-color);
+            color: white;
+            padding: 4px 8px;
+            font-size: 11px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .info-section.business-terms {
+            grid-column: 1 / -1;
+        }
+
+        .info-section.product-section {
+            grid-column: 1 / -1;
+            margin-top: 14px;
+        }
+
+        .product-section .product-table {
+            margin-bottom: 0;
+            border: none;
+        }
+
+        .info-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .info-item {
+            display: flex;
+            border: 0.5px solid var(--border-light);
+            padding: 5px 8px;
+            font-size: 11px;
+        }
+
+        .info-item.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .label {
+            font-weight: 500;
+            width: 70px;
+            flex-shrink: 0;
+            color: var(--text-medium);
+        }
+
+        .value {
+            flex-grow: 1;
+            color: var(--text-dark);
+        }
+
+        .product-table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+            margin-bottom: 14px;
+        }
+
+        .product-table th,
+        .product-table td {
+            border: 1px solid var(--border-color);
+            padding: 5px 6px;
+            text-align: center;
+            font-size: 11px;
+        }
+
+        .product-table th {
+            background-color: var(--bg-secondary);
+            font-weight: 500;
+            color: var(--text-medium);
+        }
+
+        .desc-col {
+            text-align: left !important;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: pre-wrap;
+        }
+
+        .footer-area {
+            margin-top: auto;
+            /* Pushes to bottom IF there is space, but stays in flow */
+            padding-top: 20px;
+            width: 100%;
+            page-break-inside: avoid;
+        }
+
+        .product-table tfoot td {
+            background-color: var(--bg-secondary);
+            font-size: 11px;
+            padding: 5px 6px;
+        }
+
+        .product-table tfoot td:last-child {
+            text-align: center;
+        }
+
+        .sign-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-top: 80px;
+            /* Increased space to prevent stamp overlap */
+            padding-bottom: 20px;
+            page-break-inside: avoid;
+        }
+
+        .stamp-box {
+            position: relative;
+            width: 150px;
+            text-align: center;
+        }
+
+        .company-stamp {
+            position: absolute;
+            top: -50px;
+            /* Slightly lower to stay within padding */
+            left: 30px;
+            /* Centered better in box */
+            width: 90px;
+            /* Slightly smaller */
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        /* ========== ANIMATIONS ========== */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ========== PRINT STYLES ========== */
+        @media print {
+            body {
+                background: white;
+            }
+
+            .preview-controls {
+                display: none !important;
+            }
+
+            .preview-container {
+                margin: 0;
+                padding: 0;
+            }
+
+            .quotation-template {
+                box-shadow: none;
+                padding: 15mm;
+            }
+
+            @page {
+                size: A4;
+                margin: 15mm;
+            }
+
+            @page {
+                size: A4;
+                margin: 15mm;
+            }
+
+            /* Force header to stay horizontal in print */
+            .header {
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: space-between !important;
+                align-items: flex-start !important;
+            }
+
+            .header-info {
+                text-align: right !important;
+            }
+        }
+
+        /* ========== RESPONSIVE STYLES ========== */
+        @media (max-width: 768px) {
+            .form-view {
+                padding: 20px 15px;
+            }
+
+            .form-card {
+                padding: 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .form-header h1 {
+                font-size: 24px;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .header-info {
+                text-align: left;
+            }
+
+            .quotation-template {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ========== FORM VIEW ========== -->
+    <div id="formView" class="form-view">
+        <div class="form-header">
+            <img src="logo.png" alt="TMVC Logo">
+            <h1>報價單系統</h1>
+            <p>天目科技股份有限公司</p>
+        </div>
+
+        <!-- Quote Metadata Card -->
+        <div class="form-card">
+            <h2>📄 報價資訊</h2>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>報價單號 *</label>
+                    <input type="text" id="quoteNumber" placeholder="自動產生" readonly required>
+                </div>
+                <div class="form-group">
+                    <label>報價日期 *</label>
+                    <input type="date" id="quoteDate" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>有效日期</label>
+                    <input type="date" id="validUntil" placeholder="報價有效期限">
+                </div>
+                <div class="form-group">
+                    <label>負責業務</label>
+                    <select id="salesRep" onchange="updateSalesInfo()">
+                        <option value="">請選擇業務人員</option>
+                        <option value="adam">成必宏</option>
+                        <option value="nelson">楊協翰</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>業務電話</label>
+                    <input type="tel" id="salesPhone" placeholder="自動填入" readonly>
+                </div>
+                <div class="form-group">
+                    <label>業務Email</label>
+                    <input type="email" id="salesEmail" placeholder="自動填入" readonly>
+                </div>
+            </div>
+        </div>
+
+        <!-- Client Information Card -->
+        <div class="form-card">
+            <h2>👤 客戶資訊</h2>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>公司抬頭 *</label>
+                    <input type="text" id="clientCompany" placeholder="請輸入客戶公司名稱" required>
+                </div>
+                <div class="form-group">
+                    <label>統一編號</label>
+                    <input type="text" id="clientTaxId" placeholder="請輸入統一編號">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>聯絡人</label>
+                    <input type="text" id="clientContact" placeholder="請輸入聯絡人姓名">
+                </div>
+                <div class="form-group">
+                    <label>聯絡電話</label>
+                    <input type="tel" id="clientPhone" placeholder="請輸入聯絡電話">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>聯絡Email</label>
+                    <input type="email" id="clientEmail" placeholder="請輸入Email">
+                </div>
+                <div class="form-group">
+                    <label>傳真號碼</label>
+                    <input type="tel" id="clientFax" placeholder="請輸入傳真號碼">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>聯絡地址</label>
+                    <input type="text" id="clientAddress" placeholder="請輸入聯絡地址">
+                </div>
+            </div>
+        </div>
+
+        <!-- Business Terms Card -->
+        <div class="form-card">
+            <h2>📋 交易條件</h2>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>交貨日期</label>
+                    <input type="date" id="deliveryDate" placeholder="請選擇交貨日期">
+                </div>
+                <div class="form-group">
+                    <label>交貨方式</label>
+                    <input type="text" id="deliveryMethod" placeholder="例如：宅配、自取、貨運">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>保固期間</label>
+                    <input type="text" id="warrantyPeriod" placeholder="例如：一年保固、終身保固">
+                </div>
+                <div class="form-group">
+                    <label>付款條件</label>
+                    <input type="text" id="paymentTerms" placeholder="例如：貨到付款、30天內付款">
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>付款帳號</label>
+                    <input type="text" id="paymentAccount" placeholder="請輸入銀行帳號或匯款資訊">
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Items Card -->
+        <div class="form-card">
+            <h2>📦 產品項目</h2>
+            <div id="productItems" class="product-items">
+                <!-- Dynamic product items will be inserted here -->
+            </div>
+            <button class="add-item-btn" onclick="addProductItem()">
+                <span>➕</span>
+                <span>新增產品項目</span>
+            </button>
+        </div>
+
+        <!-- Summary Card -->
+        <div class="form-card">
+            <div class="summary-section">
+                <div class="summary-row">
+                    <span>小計：</span>
+                    <span id="formSubtotal">NT$ 0</span>
+                </div>
+                <div class="summary-row">
+                    <span>營業稅 (5%)：</span>
+                    <span id="formTax">NT$ 0</span>
+                </div>
+                <div class="summary-row total">
+                    <span>總計：</span>
+                    <span id="formTotal">NT$ 0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="btn-group">
+            <button class="btn-primary" onclick="generatePreview()">🔍 生成預覽</button>
+        </div>
+    </div>
+
+    <!-- ========== PREVIEW VIEW ========== -->
+    <div id="previewView" class="preview-view">
+        <div class="preview-controls no-print">
+            <div style="color: white; font-weight: 600;">報價單預覽</div>
+            <div class="btn-group">
+                <button class="btn-secondary" onclick="backToEdit()">← 返回編輯</button>
+                <button class="btn-primary" onclick="printQuotation()">🖨️ 下載 / 列印</button>
+            </div>
+        </div>
+
+        <div class="preview-container">
+            <div class="quotation-template">
+                <div class="header">
+                    <img src="logo.png" alt="TMVC Logo" style="height: 60px;">
+                    <div class="header-info">
+                        <div class="company-name">天目科技股份有限公司</div>
+                        <div>TanMu Vision Consultants, Inc.</div>
+                        <div>235 新北市中和區板南路671號8樓</div>
+                        <div>https://www.tmvc.com.tw/</div>
+                    </div>
+                </div>
+
+                <div class="title">報　價　單</div>
+
+                <div class="info-container">
+                    <!-- Left Column: Customer Information -->
+                    <div class="info-section">
+                        <div class="info-section-title">客戶資訊</div>
+                        <div class="info-item">
+                            <span class="label">公司抬頭：</span>
+                            <span class="value" id="previewClientCompany"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">統一編號：</span>
+                            <span class="value" id="previewClientTaxId"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">聯絡人：</span>
+                            <span class="value" id="previewClientContact"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">聯絡電話：</span>
+                            <span class="value" id="previewClientPhone"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">聯絡Email：</span>
+                            <span class="value" id="previewClientEmail"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">傳真號碼：</span>
+                            <span class="value" id="previewClientFax"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">聯絡地址：</span>
+                            <span class="value" id="previewClientAddress"></span>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Quote Information -->
+                    <div class="info-section">
+                        <div class="info-section-title">報價資訊</div>
+                        <div class="info-item">
+                            <span class="label">報價單號：</span>
+                            <span class="value" id="previewQuoteNumber"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">報價日期：</span>
+                            <span class="value" id="previewQuoteDate"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">有效日期：</span>
+                            <span class="value" id="previewValidUntil"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">負責業務：</span>
+                            <span class="value" id="previewSalesRep"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">業務電話：</span>
+                            <span class="value" id="previewSalesPhone"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">業務Email：</span>
+                            <span class="value" id="previewSalesEmail"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Business Terms - Full Width -->
+                <div class="info-section business-terms">
+                    <div class="info-section-title">交易條件</div>
+                    <div class="info-row">
+                        <div class="info-item">
+                            <span class="label">交貨日期：</span>
+                            <span class="value" id="previewDeliveryDate"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">交貨方式：</span>
+                            <span class="value" id="previewDeliveryMethod"></span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-item">
+                            <span class="label">保固期間：</span>
+                            <span class="value" id="previewWarrantyPeriod"></span>
+                        </div>
+                        <div class="info-item">
+                            <span class="label">付款條件：</span>
+                            <span class="value" id="previewPaymentTerms"></span>
+                        </div>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-item full-width">
+                            <span class="label">付款帳號：</span>
+                            <span class="value" id="previewPaymentAccount"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product Items Section -->
+                <div class="info-section product-section">
+                    <div class="info-section-title">產品項目</div>
+                    <table class="product-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 8%;">編號</th>
+                                <th style="width: 52%;">產品項目</th>
+                                <th style="width: 10%;">數量</th>
+                                <th style="width: 15%;">單價</th>
+                                <th style="width: 15%;">金額</th>
+                            </tr>
+                        </thead>
+                        <tbody id="previewProductTable">
+                            <!-- Dynamic rows will be inserted here -->
+                        </tbody>
+                        <tfoot id="previewProductTableFooter">
+                            <tr>
+                                <td colspan="4" style="text-align: right; font-weight: bold;">小計</td>
+                                <td id="previewSubtotal"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" style="text-align: right; font-weight: bold;">營業稅 (5%)</td>
+                                <td id="previewTax"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="4"
+                                    style="text-align: right; font-weight: bold; font-size: 14px; color: #d00000;">總額
+                                </td>
+                                <td id="previewTotal" style="font-weight: bold; font-size: 14px;"></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <div class="footer-area">
+                    <div class="sign-area">
+                        <div class="stamp-box">
+                            天目科技
+                            <img src="stamp.png" class="company-stamp" alt="公司章">
+                            <div style="border-top: 1px solid #000; padding-top: 5px;">公司蓋章</div>
+                        </div>
+                        <div>客戶簽章：________________</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== STATE MANAGEMENT ==========
+        const state = {
+            currentView: 'form',
+            productItems: []
+        };
+
+        // ========== INITIALIZATION ==========
+        function init() {
+            // Generate quote number: TM-Q + YYYYMMDD-HHMM
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const quoteNumber = `TM-Q${year}${month}${day}-${hours}${minutes}`;
+            document.getElementById('quoteNumber').value = quoteNumber;
+
+            // Set today's date as default
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('quoteDate').value = today;
+
+            // Set valid until date to +30 days from today
+            updateValidUntilDate(today);
+
+            // Add event listener to quote date to auto-update valid until date
+            document.getElementById('quoteDate').addEventListener('change', function (e) {
+                updateValidUntilDate(e.target.value);
+            });
+
+            // Add initial product item
+            addProductItem();
+
+            // Event listener for real-time calculation
+            document.getElementById('productItems').addEventListener('input', calculateTotals);
+        }
+
+        // ========== HELPER FUNCTIONS ==========
+        function updateValidUntilDate(quoteDateStr) {
+            // Calculate date + 30 days
+            const quoteDate = new Date(quoteDateStr);
+            quoteDate.setDate(quoteDate.getDate() + 30);
+            const validUntil = quoteDate.toISOString().split('T')[0];
+            document.getElementById('validUntil').value = validUntil;
+        }
+
+        // Employee data from employee.txt
+        const employeeData = {
+            'adam': {
+                name: '成必宏',
+                email: 'adam@tmvc.com.tw',
+                phone: '0958-629-144'
+            },
+            'nelson': {
+                name: '楊協翰',
+                email: 'nelson@tmvc.com.tw',
+                phone: '0911-033-656'
+            }
+        };
+
+        function updateSalesInfo() {
+            const selectedSales = document.getElementById('salesRep').value;
+            const phoneInput = document.getElementById('salesPhone');
+            const emailInput = document.getElementById('salesEmail');
+
+            if (selectedSales && employeeData[selectedSales]) {
+                phoneInput.value = employeeData[selectedSales].phone;
+                emailInput.value = employeeData[selectedSales].email;
+            } else {
+                phoneInput.value = '';
+                emailInput.value = '';
+            }
+        }
+
+        // ========== PRODUCT ITEM MANAGEMENT ==========
+        function addProductItem() {
+            const itemNumber = state.productItems.length + 1;
+            const item = {
+                id: Date.now(),
+                description: '',
+                quantity: 1,
+                price: 0
+            };
+
+            state.productItems.push(item);
+            renderProductItems();
+            calculateTotals();
+        }
+
+        function removeProductItem(id) {
+            if (state.productItems.length <= 1) {
+                alert('至少需要保留一個產品項目！');
+                return;
+            }
+
+            state.productItems = state.productItems.filter(item => item.id !== id);
+            renderProductItems();
+            calculateTotals();
+        }
+
+        function renderProductItems() {
+            const container = document.getElementById('productItems');
+            container.innerHTML = '';
+
+            state.productItems.forEach((item, index) => {
+                const itemHtml = `
+                    <div class="product-item" data-id="${item.id}">
+                        <div class="product-item-header">
+                            <div class="product-item-number">項目 ${index + 1}</div>
+                            ${state.productItems.length > 1 ? `<button class="remove-item-btn" onclick="removeProductItem(${item.id})">✕ 移除</button>` : ''}
+                        </div>
+                        <div class="form-group">
+                            <label>產品描述 *</label>
+                            <textarea 
+                                class="item-description" 
+                                data-id="${item.id}" 
+                                placeholder="請輸入產品或服務描述" 
+                                required
+                            >${item.description}</textarea>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>數量 *</label>
+                                <input 
+                                    type="number" 
+                                    class="item-quantity" 
+                                    data-id="${item.id}" 
+                                    value="${item.quantity}" 
+                                    min="1" 
+                                    required
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label>單價 (NT$) *</label>
+                                <input 
+                                    type="number" 
+                                    class="item-price" 
+                                    data-id="${item.id}" 
+                                    value="${item.price}" 
+                                    min="0" 
+                                    required
+                                >
+                            </div>
+                            <div class="form-group">
+                                <label>小計 (NT$)</label>
+                                <input 
+                                    type="number" 
+                                    class="item-subtotal" 
+                                    data-id="${item.id}" 
+                                    value="${item.quantity * item.price}" 
+                                    readonly
+                                >
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', itemHtml);
+            });
+        }
+
+        // ========== CALCULATIONS ==========
+        function calculateTotals() {
+            // Update state from inputs
+            document.querySelectorAll('.product-item').forEach(itemEl => {
+                const id = parseInt(itemEl.dataset.id);
+                const item = state.productItems.find(i => i.id === id);
+                if (item) {
+                    item.description = itemEl.querySelector('.item-description').value;
+                    item.quantity = parseFloat(itemEl.querySelector('.item-quantity').value) || 0;
+                    item.price = parseFloat(itemEl.querySelector('.item-price').value) || 0;
+
+                    // Update item subtotal display
+                    const subtotal = item.quantity * item.price;
+                    itemEl.querySelector('.item-subtotal').value = subtotal;
+                }
+            });
+
+            // Calculate totals
+            const subtotal = state.productItems.reduce((sum, item) => sum + (item.quantity * item.price), 0);
+            const tax = Math.round(subtotal * 0.05);
+            const total = subtotal + tax;
+
+            // Update display
+            document.getElementById('formSubtotal').textContent = `NT$ ${subtotal.toLocaleString()}`;
+            document.getElementById('formTax').textContent = `NT$ ${tax.toLocaleString()}`;
+            document.getElementById('formTotal').textContent = `NT$ ${total.toLocaleString()}`;
+        }
+
+        // ========== FORM VALIDATION ==========
+        function validateForm() {
+            const quoteNumber = document.getElementById('quoteNumber').value.trim();
+            const quoteDate = document.getElementById('quoteDate').value;
+            const clientCompany = document.getElementById('clientCompany').value.trim();
+
+            if (!quoteNumber) {
+                alert('請輸入報價單號！');
+                return false;
+            }
+
+            if (!quoteDate) {
+                alert('請選擇報價日期！');
+                return false;
+            }
+
+            if (!clientCompany) {
+                alert('請輸入客戶公司名稱！');
+                return false;
+            }
+
+            // Validate product items
+            for (let item of state.productItems) {
+                if (!item.description.trim()) {
+                    alert('請填寫所有產品描述！');
+                    return false;
+                }
+                if (item.quantity <= 0) {
+                    alert('產品數量必須大於 0！');
+                    return false;
+                }
+                if (item.price < 0) {
+                    alert('產品單價不能為負數！');
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        // ========== VIEW SWITCHING ==========
+        function generatePreview() {
+            if (!validateForm()) {
+                return;
+            }
+
+            // Populate Quote Information
+            document.getElementById('previewQuoteNumber').textContent = document.getElementById('quoteNumber').value;
+            document.getElementById('previewQuoteDate').textContent = document.getElementById('quoteDate').value;
+            document.getElementById('previewValidUntil').textContent = document.getElementById('validUntil').value || '';
+
+            // Get sales rep name from select
+            const salesRepSelect = document.getElementById('salesRep');
+            const salesRepName = salesRepSelect.options[salesRepSelect.selectedIndex]?.text || '';
+            document.getElementById('previewSalesRep').textContent = salesRepName;
+            document.getElementById('previewSalesPhone').textContent = document.getElementById('salesPhone').value;
+            document.getElementById('previewSalesEmail').textContent = document.getElementById('salesEmail').value;
+
+            // Populate Customer Information
+            document.getElementById('previewClientCompany').textContent = document.getElementById('clientCompany').value;
+            document.getElementById('previewClientTaxId').textContent = document.getElementById('clientTaxId').value || '';
+            document.getElementById('previewClientContact').textContent = document.getElementById('clientContact').value || '';
+            document.getElementById('previewClientPhone').textContent = document.getElementById('clientPhone').value || '';
+            document.getElementById('previewClientEmail').textContent = document.getElementById('clientEmail').value || '';
+            document.getElementById('previewClientFax').textContent = document.getElementById('clientFax').value || '';
+            document.getElementById('previewClientAddress').textContent = document.getElementById('clientAddress').value || '';
+
+            // Populate Business Terms
+            document.getElementById('previewDeliveryDate').textContent = document.getElementById('deliveryDate').value || '';
+            document.getElementById('previewDeliveryMethod').textContent = document.getElementById('deliveryMethod').value || '';
+            document.getElementById('previewWarrantyPeriod').textContent = document.getElementById('warrantyPeriod').value || '';
+            document.getElementById('previewPaymentTerms').textContent = document.getElementById('paymentTerms').value || '';
+            document.getElementById('previewPaymentAccount').textContent = document.getElementById('paymentAccount').value || '';
+
+            // Generate product table rows
+            const tableBody = document.getElementById('previewProductTable');
+            tableBody.innerHTML = '';
+
+            state.productItems.forEach((item, index) => {
+                const row = `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td class="desc-col">${item.description}</td>
+                        <td>${item.quantity}</td>
+                        <td>${item.price.toLocaleString()}</td>
+                        <td>${(item.quantity * item.price).toLocaleString()}</td>
+                    </tr>
+                `;
+                tableBody.insertAdjacentHTML('beforeend', row);
+            });
+
+            // Calculate and populate totals
+            const subtotal = state.productItems.reduce((sum, item) => sum + (item.quantity * item.price), 0);
+            const tax = Math.round(subtotal * 0.05);
+            const total = subtotal + tax;
+
+            document.getElementById('previewSubtotal').textContent = subtotal.toLocaleString();
+            document.getElementById('previewTax').textContent = tax.toLocaleString();
+            document.getElementById('previewTotal').textContent = total.toLocaleString();
+
+            // Switch view
+            document.getElementById('formView').style.display = 'none';
+            document.getElementById('previewView').style.display = 'block';
+            state.currentView = 'preview';
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function backToEdit() {
+            document.getElementById('previewView').style.display = 'none';
+            document.getElementById('formView').style.display = 'block';
+            state.currentView = 'form';
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function printQuotation() {
+            window.print();
+        }
+
+        // ========== RUN ON LOAD ==========
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+
+</html>

@@ -29,7 +29,7 @@
             <a href="#services">服務項目</a>
             <a href="#pricing">報價中心</a>
             <a href="#faq">常見問題</a>
-            <a href="admin.html" style="opacity: 0.6">管理員入口</a>
+
         </div>
         <div style="display: flex; align-items: center;">
             <div class="theme-switcher">
@@ -49,7 +49,7 @@
 
     <header class="hero">
         <h1 class="hero-title">專業電腦維護<br><span>重新定義效率</span></h1>
-        <p class="hero-subtitle">我們結合精密診斷與極速響應，為您的數位資產提供全方位的技術保障。從硬體調優到系統重構，每一處細節都追求極致。</p>
+        <p class="hero-subtitle">提供專業一般維修、夜間緊急維修、假日維修及到府服務。我們結合精密診斷與極速響應，為您的數位資產提供全方位的技術保障。</p>
         <div class="hero-btns">
             <button class="btn-primary" id="start-btn" style="padding: 1rem 2.5rem; font-size: 1rem;">
                 立即開始
@@ -64,19 +64,34 @@
         </div>
         <div class="services-grid">
             <div class="service-card">
+                <i data-lucide="monitor"></i>
+                <h3>電腦維修</h3>
+                <p>涵蓋品牌電腦、個人電腦、筆記型電腦及各類電腦週邊設備故障排除。</p>
+            </div>
+            <div class="service-card">
+                <i data-lucide="settings"></i>
+                <h3>系統維護</h3>
+                <p>系統重灌（需自備正版）、系統恢復、軟體異常排除與系統環境優化。</p>
+            </div>
+            <div class="service-card">
+                <i data-lucide="wrench"></i>
+                <h3>客製化服務</h3>
+                <p>專業電腦組裝、銷售服務，根據您的需求量身打造最合適的硬體配置。</p>
+            </div>
+            <div class="service-card">
+                <i data-lucide="database"></i>
+                <h3>資料救援</h3>
+                <p>針對內建硬碟、外接硬碟、隨身碟等儲存裝置提供專業的資料恢復服務。</p>
+            </div>
+            <div class="service-card">
                 <i data-lucide="home"></i>
-                <h3>到府維修</h3>
-                <p>專業工程師親臨現場，解決軟硬體疑難雜症，省去您搬運電腦的煩惱。</p>
+                <h3>到府收件</h3>
+                <p>新竹縣市提供到府收件服務，省去搬運負擔。偏遠地區另計。</p>
             </div>
             <div class="service-card">
-                <i data-lucide="shield-check"></i>
-                <h3>售後服務</h3>
-                <p>業界領先的保固承諾與遠端技術支援，確保您的設備長久穩定運作。</p>
-            </div>
-            <div class="service-card">
-                <i data-lucide="zap"></i>
-                <h3>硬體升級</h3>
-                <p>針對性能瓶頸提供量身定制的升級方案，釋放硬體的潛在效能。</p>
+                <i data-lucide="clock"></i>
+                <h3>夜間與假日服務</h3>
+                <p>提供夜間緊急維修與假日報修服務，在您最需要的時刻提供技術支援。</p>
             </div>
         </div>
     </section>
@@ -85,6 +100,9 @@
         <div class="section-header">
             <span class="section-tag">TRANSPARENT</span>
             <h2 class="section-title">透明報價表</h2>
+            <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">
+                計價方式：總費用 = 檢測費（依狀況收費）＋ 工資 ＋ 零組件費用
+            </p>
         </div>
         <table class="pricing-table">
             <thead>
@@ -96,24 +114,29 @@
             </thead>
             <tbody>
                 <tr>
-                    <td>基礎系統檢測</td>
-                    <td>全面硬體健康評估與系統優化</td>
-                    <td class="price-tag">NT$ 800+</td>
+                    <td>基礎檢測費</td>
+                    <td>初步檢查與狀況鑑定，後續另行報價</td>
+                    <td class="price-tag">NT$ 300</td>
                 </tr>
                 <tr>
-                    <td>到府出勤費</td>
-                    <td>市中心區域工程師交通費用</td>
-                    <td class="price-tag">NT$ 500+</td>
+                    <td>系統安裝 / 電腦重灌</td>
+                    <td>需自備正版系統，含驅動程式安裝</td>
+                    <td class="price-tag">NT$ 0 - 1,500</td>
                 </tr>
                 <tr>
-                    <td>組件更換工資</td>
-                    <td>不包含硬體耗材本身費用</td>
-                    <td class="price-tag">NT$ 1,200+</td>
+                    <td>代送原廠服務</td>
+                    <td>保固內產品代送，節省繁瑣報修流程</td>
+                    <td class="price-tag">NT$ 0 - 300</td>
                 </tr>
                 <tr>
-                    <td>數據恢復服務</td>
-                    <td>針對意外刪除或硬體損壞的資料救援</td>
-                    <td class="price-tag">NT$ 3,000+</td>
+                    <td>拆裝 / 組裝工資</td>
+                    <td>特殊機殼、水冷系統依複雜度另計</td>
+                    <td class="price-tag">NT$ 300 - 3,000</td>
+                </tr>
+                <tr>
+                    <td>物流收送服務</td>
+                    <td>新竹縣市到府收件或全國宅配收送</td>
+                    <td class="price-tag">NT$ 300</td>
                 </tr>
             </tbody>
         </table>
@@ -140,7 +163,7 @@
                     <i data-lucide="chevron-down"></i>
                 </div>
                 <div class="faq-answer">
-                    若工程師判定無法修復且不建議進行進一步處理，我們僅會收取基礎的檢測費或出勤費。
+                    若工程師判定無法現場修復且不建議進行進一步處理，我們僅會收取基礎的檢測費 NT$ 300 或相關交通費用。
                 </div>
             </div>
             <div class="faq-item">
@@ -187,7 +210,12 @@
     </div>
 
     <footer>
-        <p>&copy; 2024 TECHFIX PC Maintenance. Defined by Precision.</p>
+        <div class="footer-content">
+            <p>&copy; 2026 TECHFIX PC Maintenance. Defined by Precision.</p>
+            <a href="admin.html" class="admin-link" title="管理員入口">
+                <i data-lucide="lock"></i>
+            </a>
+        </div>
     </footer>
 
     <script src="config.js"></script>
