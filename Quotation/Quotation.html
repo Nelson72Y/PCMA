@@ -9,664 +9,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
         rel="stylesheet">
-    <style>
-        /* ========== GLOBAL STYLES ========== */
-        :root {
-            --primary-color: #8b7355;
-            --primary-light: #a69080;
-            --accent-color: #d4a574;
-            --bg-main: #faf9f7;
-            --bg-secondary: #f5f3f0;
-            --card-bg: #ffffff;
-            --text-dark: #3d3d3d;
-            --text-medium: #6b6b6b;
-            --text-light: #999999;
-            --border-color: #e8e6e3;
-            --border-light: #f0eeeb;
-            --success-green: #7fa388;
-            --error-red: #c98282;
-            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.03);
-            --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.04);
-            --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.05);
-            --transition-speed: 0.2s;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
-            line-height: 1.6;
-            background: var(--bg-main);
-            color: var(--text-dark);
-            min-height: 100vh;
-            -webkit-print-color-adjust: exact;
-            print-color-adjust: exact;
-        }
-
-        /* ========== FORM VIEW STYLES ========== */
-        .form-view {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px 15px;
-        }
-
-        .form-header {
-            text-align: center;
-            margin-bottom: 20px;
-            animation: fadeInDown 0.4s ease;
-        }
-
-        .form-header img {
-            height: 50px;
-            margin-bottom: 12px;
-        }
-
-        .form-header h1 {
-            font-size: 22px;
-            font-weight: 500;
-            color: var(--primary-color);
-            letter-spacing: 2px;
-            margin-bottom: 6px;
-        }
-
-        .form-header p {
-            color: var(--text-light);
-            font-size: 13px;
-        }
-
-        .form-card {
-            background: var(--card-bg);
-            border-radius: 6px;
-            padding: 16px;
-            margin-bottom: 12px;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid var(--border-light);
-            animation: fadeInUp 0.4s ease;
-            transition: all var(--transition-speed);
-        }
-
-        .form-card:hover {
-            box-shadow: var(--shadow-md);
-        }
-
-        .form-card h2 {
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--primary-color);
-            margin-bottom: 12px;
-            padding-bottom: 8px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .form-group label {
-            font-weight: 400;
-            color: var(--text-medium);
-            margin-bottom: 4px;
-            font-size: 12px;
-        }
-
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            padding: 6px 10px;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            font-size: 13px;
-            font-family: inherit;
-            transition: all var(--transition-speed);
-            background: var(--card-bg);
-        }
-
-        .form-group input:focus,
-        .form-group textarea:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px rgba(139, 115, 85, 0.1);
-        }
-
-        .form-group textarea {
-            resize: vertical;
-            min-height: 60px;
-        }
-
-        .form-group input[readonly] {
-            background: var(--bg-secondary);
-            color: var(--text-light);
-        }
-
-        /* Product Items Section */
-        .product-items {
-            margin-top: 10px;
-        }
-
-        .product-item {
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            padding: 12px;
-            margin-bottom: 8px;
-            position: relative;
-            transition: all var(--transition-speed);
-        }
-
-        .product-item:hover {
-            border-color: var(--primary-light);
-        }
-
-        .product-item-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .product-item-number {
-            font-weight: 500;
-            color: var(--primary-color);
-            font-size: 13px;
-        }
-
-        .remove-item-btn {
-            background: var(--error-red);
-            color: white;
-            border: none;
-            padding: 4px 10px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 11px;
-            font-weight: 400;
-            transition: all var(--transition-speed);
-        }
-
-        .remove-item-btn:hover {
-            opacity: 0.9;
-        }
-
-        .add-item-btn {
-            width: 100%;
-            padding: 8px;
-            background: var(--success-green);
-            color: white;
-            border: none;
-            border-radius: 4px;
-            font-size: 13px;
-            font-weight: 400;
-            cursor: pointer;
-            transition: all var(--transition-speed);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-        }
-
-        .add-item-btn:hover {
-            opacity: 0.9;
-        }
-
-        /* Summary Section */
-        .summary-section {
-            background: var(--bg-secondary);
-            color: var(--text-dark);
-            padding: 14px;
-            border-radius: 4px;
-            margin-top: 8px;
-            border: 1px solid var(--border-color);
-        }
-
-        .summary-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 6px 0;
-            font-size: 13px;
-        }
-
-        .summary-row.total {
-            border-top: 1px solid var(--border-color);
-            margin-top: 6px;
-            padding-top: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        /* Buttons */
-        .btn-group {
-            display: flex;
-            gap: 8px;
-            margin-top: 16px;
-        }
-
-        .btn-primary,
-        .btn-secondary {
-            flex: 1;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-            font-size: 13px;
-            font-weight: 400;
-            cursor: pointer;
-            transition: all var(--transition-speed);
-            font-family: inherit;
-        }
-
-        .btn-primary {
-            background: var(--primary-color);
-            color: white;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .btn-primary:hover {
-            opacity: 0.9;
-        }
-
-        .btn-secondary {
-            background: white;
-            color: var(--primary-color);
-            border: 1px solid var(--primary-color);
-        }
-
-        .btn-secondary:hover {
-            background: var(--bg-secondary);
-        }
-
-        /* ========== PREVIEW VIEW STYLES ========== */
-        .preview-view {
-            display: none;
-            background: #e0e0e0;
-            /* Darker background to make paper stand out */
-            min-height: 100vh;
-        }
-
-        .preview-controls {
-            background: var(--primary-color);
-            padding: 10px 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: var(--shadow-md);
-        }
-
-        .preview-controls .btn-group {
-            margin: 0;
-        }
-
-        .preview-controls .btn-primary,
-        .preview-controls .btn-secondary {
-            padding: 6px 14px;
-            font-size: 12px;
-        }
-
-        .preview-container {
-            padding: 40px 10px;
-            display: flex;
-            justify-content: center;
-            overflow-x: auto;
-        }
-
-        @media print {
-
-            html,
-            body {
-                height: auto !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                background: white !important;
-                overflow: visible !important;
-            }
-
-            .form-view,
-            .preview-controls,
-            .btn-group {
-                display: none !important;
-                height: 0 !important;
-                margin: 0 !important;
-                padding: 0 !important;
-            }
-
-            .preview-view {
-                display: block !important;
-                background: white !important;
-                padding: 0 !important;
-                margin: 0 !important;
-            }
-
-            .preview-container {
-                max-width: none !important;
-                margin: 0 !important;
-                padding: 0 !important;
-                display: block !important;
-                overflow: visible !important;
-            }
-
-            .quotation-template {
-                width: 100% !important;
-                /* Let print margin handle width */
-                min-height: auto !important;
-                /* Content will define height */
-                margin: 0 !important;
-                padding: 0 !important;
-                /* Remove internal padding, use @page margin only */
-                border: none !important;
-                box-shadow: none !important;
-                display: flex !important;
-            }
-
-            @page {
-                size: A4;
-                margin: 1cm;
-                /* Exactly 1cm as requested */
-            }
-        }
-
-        /* Quotation Template Styles */
-        .quotation-template {
-            background: white;
-            padding: 30px;
-            box-shadow: var(--shadow-lg);
-            width: 210mm;
-            max-width: 100%;
-            min-height: 297mm;
-            /* Standard A4 height */
-            height: auto;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            margin: 0;
-            box-sizing: border-box;
-        }
-
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            border-bottom: 1px solid var(--primary-color);
-            padding-bottom: 8px;
-            margin-bottom: 16px;
-        }
-
-        .header-info {
-            text-align: right;
-            font-size: 10px;
-            color: var(--text-medium);
-        }
-
-        .company-name {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--primary-color);
-        }
-
-        .title {
-            text-align: center;
-            font-size: 20px;
-            letter-spacing: 8px;
-            margin: 14px 0;
-            font-weight: 500;
-            color: var(--text-dark);
-        }
-
-        .info-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 14px;
-        }
-
-        .info-section {
-            border: 1px solid var(--border-color);
-            background: var(--bg-secondary);
-        }
-
-        .info-section-title {
-            background: var(--primary-color);
-            color: white;
-            padding: 4px 8px;
-            font-size: 11px;
-            font-weight: 500;
-            text-align: center;
-        }
-
-        .info-section.business-terms {
-            grid-column: 1 / -1;
-        }
-
-        .info-section.product-section {
-            grid-column: 1 / -1;
-            margin-top: 14px;
-        }
-
-        .product-section .product-table {
-            margin-bottom: 0;
-            border: none;
-        }
-
-        .info-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .info-item {
-            display: flex;
-            border: 0.5px solid var(--border-light);
-            padding: 5px 8px;
-            font-size: 11px;
-        }
-
-        .info-item.full-width {
-            grid-column: 1 / -1;
-        }
-
-        .label {
-            font-weight: 500;
-            width: 70px;
-            flex-shrink: 0;
-            color: var(--text-medium);
-        }
-
-        .value {
-            flex-grow: 1;
-            color: var(--text-dark);
-        }
-
-        .product-table {
-            width: 100%;
-            border-collapse: collapse;
-            table-layout: fixed;
-            margin-bottom: 14px;
-        }
-
-        .product-table th,
-        .product-table td {
-            border: 1px solid var(--border-color);
-            padding: 5px 6px;
-            text-align: center;
-            font-size: 11px;
-        }
-
-        .product-table th {
-            background-color: var(--bg-secondary);
-            font-weight: 500;
-            color: var(--text-medium);
-        }
-
-        .desc-col {
-            text-align: left !important;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            white-space: pre-wrap;
-        }
-
-        .footer-area {
-            margin-top: auto;
-            /* Pushes to bottom IF there is space, but stays in flow */
-            padding-top: 20px;
-            width: 100%;
-            page-break-inside: avoid;
-        }
-
-        .product-table tfoot td {
-            background-color: var(--bg-secondary);
-            font-size: 11px;
-            padding: 5px 6px;
-        }
-
-        .product-table tfoot td:last-child {
-            text-align: center;
-        }
-
-        .sign-area {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            padding-top: 80px;
-            /* Increased space to prevent stamp overlap */
-            padding-bottom: 20px;
-            page-break-inside: avoid;
-        }
-
-        .stamp-box {
-            position: relative;
-            width: 150px;
-            text-align: center;
-        }
-
-        .company-stamp {
-            position: absolute;
-            top: -50px;
-            /* Slightly lower to stay within padding */
-            left: 30px;
-            /* Centered better in box */
-            width: 90px;
-            /* Slightly smaller */
-            opacity: 0.7;
-            pointer-events: none;
-        }
-
-        /* ========== ANIMATIONS ========== */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ========== PRINT STYLES ========== */
-        @media print {
-            body {
-                background: white;
-            }
-
-            .preview-controls {
-                display: none !important;
-            }
-
-            .preview-container {
-                margin: 0;
-                padding: 0;
-            }
-
-            .quotation-template {
-                box-shadow: none;
-                padding: 15mm;
-            }
-
-            @page {
-                size: A4;
-                margin: 15mm;
-            }
-
-            @page {
-                size: A4;
-                margin: 15mm;
-            }
-
-            /* Force header to stay horizontal in print */
-            .header {
-                display: flex !important;
-                flex-direction: row !important;
-                justify-content: space-between !important;
-                align-items: flex-start !important;
-            }
-
-            .header-info {
-                text-align: right !important;
-            }
-        }
-
-        /* ========== RESPONSIVE STYLES ========== */
-        @media (max-width: 768px) {
-            .form-view {
-                padding: 20px 15px;
-            }
-
-            .form-card {
-                padding: 20px;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .btn-group {
-                flex-direction: column;
-            }
-
-            .form-header h1 {
-                font-size: 24px;
-            }
-
-            .header {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .header-info {
-                text-align: left;
-            }
-
-            .quotation-template {
-                padding: 20px;
-            }
-        }
-    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.2/html2pdf.bundle.min.js"></script>
+    <link rel="stylesheet" href="Quotation.css">
 </head>
 
 <body>
@@ -831,7 +175,9 @@
             <div style="color: white; font-weight: 600;">報價單預覽</div>
             <div class="btn-group">
                 <button class="btn-secondary" onclick="backToEdit()">← 返回編輯</button>
-                <button class="btn-primary" onclick="printQuotation()">🖨️ 下載 / 列印</button>
+                <button class="btn-primary" onclick="downloadPDF()">📥 下載 PDF</button>
+                <button class="btn-secondary" onclick="doPrint()" style="border-color: white; color: white;">🖨️
+                    列印</button>
             </div>
         </div>
 
@@ -960,23 +306,22 @@
                         <tbody id="previewProductTable">
                             <!-- Dynamic rows will be inserted here -->
                         </tbody>
-                        <tfoot id="previewProductTableFooter">
-                            <tr>
-                                <td colspan="4" style="text-align: right; font-weight: bold;">小計</td>
-                                <td id="previewSubtotal"></td>
-                            </tr>
-                            <tr>
-                                <td colspan="4" style="text-align: right; font-weight: bold;">營業稅 (5%)</td>
-                                <td id="previewTax"></td>
-                            </tr>
-                            <tr>
-                                <td colspan="4"
-                                    style="text-align: right; font-weight: bold; font-size: 14px; color: #d00000;">總額
-                                </td>
-                                <td id="previewTotal" style="font-weight: bold; font-size: 14px;"></td>
-                            </tr>
-                        </tfoot>
                     </table>
+                    <!-- 新的總計區塊，獨立於表格之外 -->
+                    <div id="previewSummaryContainer" class="preview-summary-container">
+                        <div class="summary-line">
+                            <span class="summary-label">小計</span>
+                            <span class="summary-value" id="previewSubtotal"></span>
+                        </div>
+                        <div class="summary-line">
+                            <span class="summary-label">營業稅 (5%)</span>
+                            <span class="summary-value" id="previewTax"></span>
+                        </div>
+                        <div class="summary-line total">
+                            <span class="summary-label">總額</span>
+                            <span class="summary-value" id="previewTotal"></span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="footer-area">
@@ -1278,9 +623,9 @@
             const tax = Math.round(subtotal * 0.05);
             const total = subtotal + tax;
 
-            document.getElementById('previewSubtotal').textContent = subtotal.toLocaleString();
-            document.getElementById('previewTax').textContent = tax.toLocaleString();
-            document.getElementById('previewTotal').textContent = total.toLocaleString();
+            document.getElementById('previewSubtotal').textContent = `NT$ ${subtotal.toLocaleString()}`;
+            document.getElementById('previewTax').textContent = `NT$ ${tax.toLocaleString()}`;
+            document.getElementById('previewTotal').textContent = `NT$ ${total.toLocaleString()}`;
 
             // Switch view
             document.getElementById('formView').style.display = 'none';
@@ -1300,7 +645,23 @@
             window.scrollTo(0, 0);
         }
 
-        function printQuotation() {
+        function downloadPDF() {
+            const element = document.querySelector('.quotation-template');
+            const quoteNumber = document.getElementById('previewQuoteNumber').textContent || 'Quotation';
+
+            const opt = {
+                margin: 10,
+                filename: quoteNumber + '.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true, letterRendering: true },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+                pagebreak: { mode: ['avoid-all', 'css', 'legacy'] }
+            };
+
+            html2pdf().set(opt).from(element).save();
+        }
+
+        function doPrint() {
             window.print();
         }
 
